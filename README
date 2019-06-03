@@ -8,7 +8,7 @@ Instructions to push your code to code.google.com
         Add a license: Apache License 2.0
 
 2. Run 'git init' in the folder that was extracted from the downloaded .zip file, in order to
- initialize local repository.
+ initialize local repository
 
 3. Make a local commit.
     $ git add -A
