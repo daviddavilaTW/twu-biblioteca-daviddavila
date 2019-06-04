@@ -10,33 +10,57 @@ public class BibliotecaApp {
 
         Book bookArray[] = new Book[3];
 
-        bookArray[0] = new Book("BookName1", "David", 2001);
-        bookArray[1] = new Book("BookName2", "Alejandro", 2010);
-        bookArray[2] = new Book("BookName3", "Melany", 2011);
+        bookArray[0] = new Book(1,"BookName1", "David", 2001, true);
+        bookArray[1] = new Book(2,"BookName2", "Alejandro", 2010, true);
+        bookArray[2] = new Book(3,"BookName3", "Melany", 2011, false);
 
-        System.out.println("Choose an option to continue:");
-        System.out.println("1. List of books");
 
-        String optionChoised;
+        int optionChoosen = 5;
 
         Scanner scanner = new Scanner(System.in);
-        optionChoised = scanner.nextLine();
-        System.out.println("You choose the option " + optionChoised);
+
+        while (optionChoosen != 0) {
+
+            System.out.println("Choose an option to continue:");
+            System.out.println("1. List of books");
+            System.out.println("2. CheckOut a book");
+
+            System.out.println("0. Quit");
+
+            optionChoosen = scanner.nextInt();
 
 
+            switch (optionChoosen) {
+                case 1:
+                    System.out.println("\n");
 
-        // Problemas metiendolo en un metodo... (Refactor)
+                    // Problemas metiendolo en un metodo... (Refactor)
+                    System.out.println("LIST OF BOOKS");
 
-        System.out.println("\n");
+                    for (int book = 0; book < bookArray.length; book++) {
 
-        System.out.println("LIST OF BOOKS");
-        for (int book = 0; book < bookArray.length; book++) {
-            System.out.println(
-                    bookArray[book].getBookName() + " --- " +
-                            bookArray[book].getAuthorName() + " --- " +
-                            bookArray[book].getPublicationYear());
+                        if (bookArray[book].isAvaliable()) {
+
+                            System.out.println(
+                                    bookArray[book].getBookName() + " --- " +
+                                            bookArray[book].getAuthorName() + " --- " +
+                                            bookArray[book].getPublicationYear());
+
+                        }
+                    }
+
+                    break;
+
+                case 0:
+                    System.out.println("Bye!");
+                    break;
+
+                default:
+                    System.out.println("Please select a valid option!");
+
+            }
+
         }
-
 
 
     }
