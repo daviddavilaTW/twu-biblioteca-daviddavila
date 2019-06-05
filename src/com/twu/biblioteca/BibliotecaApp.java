@@ -100,7 +100,7 @@ public class BibliotecaApp {
 
                             if (!bookArray[optionReturn].isAvaliable()) {
                                 changeBookStatus(bookArray,optionReturn);
-                                System.out.println("Thank you. Enjoy the book.");
+                                System.out.println("Thank you for returning the book.");
                                 break;
                             }else{
                                 System.out.println("Sorry. This book is not available.");
