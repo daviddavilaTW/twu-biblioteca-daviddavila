@@ -62,6 +62,7 @@ public class BibliotecaApp {
                                 System.out.println(optionCheckout);
                                 if (bookArray[optionCheckout].isAvaliable()) {
                                     changeBookStatus(bookArray,optionCheckout);
+                                    System.out.println("Thank you. Enjoy the book.");
                                     break;
                                 }else{
                                     System.out.println("Sorry. This book is not available.");
