@@ -5,14 +5,13 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
-        System.out.println("\n \n");
+        System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
 
         Book bookArray[] = new Book[3];
 
-        bookArray[0] = new Book(0,"BookName1", "David", 2001, true);
-        bookArray[1] = new Book(1,"BookName2", "Alejandro", 2010, true);
-        bookArray[2] = new Book(2,"BookName3", "Melany", 2011, false);
+        bookArray[0] = new Book(1,"BookName1", "David", 2001, true);
+        bookArray[1] = new Book(2,"BookName2", "Alejandro", 2010, true);
+        bookArray[2] = new Book(3,"BookName3", "Melany", 2011, false);
 
 
         int optionChoosen = 5;
@@ -33,9 +32,9 @@ public class BibliotecaApp {
             switch (optionChoosen) {
                 case 1:
 
-                    System.out.println("LIST OF BOOKS");
+                    System.out.println("LIST OF AVAILABLE BOOKS");
 
-                    listBooks(bookArray);
+                    listAvailableBooks(bookArray);
 
                     break;
 
@@ -43,21 +42,35 @@ public class BibliotecaApp {
                 case 2:
                     //Check out a book
 
-                    System.out.println("LIST OF AVALIABLE BOOKS");
+                    System.out.println("CHECK OUT A BOOK");
 
 
-                    int optionCheckout = 6;
+                    int optionCheckout = 0;
 
-                        while (optionCheckout != 5) {
+                        while (optionCheckout != -1) {
 
                             System.out.println("Choose a book to checkout to continue:");
 
-                            listAvaliableBooks(bookArray);
+                            listAvailableBooks(bookArray);
 
-                            System.out.println("5. Exit to main menu");
+                            System.out.println("0. Exit to main menu");
 
-                            optionCheckout = scanner.nextInt();
+                            optionCheckout = scanner.nextInt()-1;
 
+                            if(optionCheckout<bookArray.length+1){
+
+                                if (bookArray[optionCheckout].isAvaliable()) {
+                                    changeBookStatus(bookArray,optionCheckout);
+                                    break;
+                                }else{
+                                    System.out.println("Sorry. This book is not available.");
+                                }
+
+                            }
+                            else{
+                                System.out.println("Choose a correct option");
+
+                            }
 
 
                         }
@@ -92,7 +105,7 @@ public class BibliotecaApp {
 
         }
     }
-    public static void listAvaliableBooks(Book[] bookArray){
+    public static void listAvailableBooks(Book[] bookArray){
 
         for (int book = 0; book < bookArray.length; book++) {
 
@@ -111,7 +124,13 @@ public class BibliotecaApp {
         }
     }
 
-    public void changeBookStatus() {
+    public static void changeBookStatus(Book[] bookArray, int bookID) {
+
+        if (bookArray[bookID].isAvaliable()){
+            bookArray[bookID].setAvaliable(false);
+        }else{
+            bookArray[bookID].setAvaliable(true);
+        }
 
 
     }
