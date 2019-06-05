@@ -57,8 +57,9 @@ public class BibliotecaApp {
 
                             optionCheckout = scanner.nextInt()-1;
 
-                            if(optionCheckout<bookArray.length+1){
-
+                            if(optionCheckout<bookArray.length){
+                                System.out.println(bookArray.length);
+                                System.out.println(optionCheckout);
                                 if (bookArray[optionCheckout].isAvaliable()) {
                                     changeBookStatus(bookArray,optionCheckout);
                                     break;
