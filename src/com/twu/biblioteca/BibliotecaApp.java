@@ -103,7 +103,7 @@ public class BibliotecaApp {
                                 System.out.println("Thank you for returning the book.");
                                 break;
                             }else{
-                                System.out.println("Sorry. This book is not available.");
+                                System.out.println("That's not a valid book to return.");
                             }
 
                         }
