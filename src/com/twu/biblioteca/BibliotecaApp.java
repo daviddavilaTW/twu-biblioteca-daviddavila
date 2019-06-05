@@ -23,6 +23,7 @@ public class BibliotecaApp {
             System.out.println("Choose an option to continue:");
             System.out.println("1. List of books");
             System.out.println("2. Checkout a book");
+            System.out.println("3. Return a book");
 
             System.out.println("0. Quit");
 
@@ -58,8 +59,8 @@ public class BibliotecaApp {
                             optionCheckout = scanner.nextInt()-1;
 
                             if(optionCheckout<bookArray.length){
-                                System.out.println(bookArray.length);
-                                System.out.println(optionCheckout);
+                                System.out.println("You choose the book number "
+                                        +(optionCheckout+1));
                                 if (bookArray[optionCheckout].isAvaliable()) {
                                     changeBookStatus(bookArray,optionCheckout);
                                     System.out.println("Thank you. Enjoy the book.");
@@ -77,6 +78,43 @@ public class BibliotecaApp {
 
                         }
                     break;
+                case 3:
+                    //Return a book
+
+                    System.out.println("RETURN A BOOK");
+
+                    int optionReturn = 0;
+
+                    while (optionReturn != -1){
+                        System.out.println("Choose a book to return to continue:");
+
+                        listUnavailableBooks(bookArray);
+
+                        System.out.println("0. Exit to main menu");
+
+                        optionReturn = scanner.nextInt()-1;
+
+                        if(optionReturn<bookArray.length){
+                            System.out.println("You choose the book number "
+                                    +(optionReturn+1));
+
+                            if (!bookArray[optionReturn].isAvaliable()) {
+                                changeBookStatus(bookArray,optionReturn);
+                                System.out.println("Thank you. Enjoy the book.");
+                                break;
+                            }else{
+                                System.out.println("Sorry. This book is not available.");
+                            }
+
+                        }
+                        else{
+                            System.out.println("Choose a correct option");
+
+                        }
+
+                    }
+                    break;
+
                 case 0:
                     System.out.println("Bye!");
                     break;
@@ -120,9 +158,22 @@ public class BibliotecaApp {
                                 bookArray[book].getPublicationYear());
 
             }
+        }
+    }
 
+    public static void listUnavailableBooks(Book[] bookArray){
 
+        for (int book = 0; book < bookArray.length; book++) {
 
+            if (!bookArray[book].isAvaliable()) {
+
+                System.out.println(
+                        bookArray[book].getIDBook() + ". " +
+                                bookArray[book].getBookName() + " --- " +
+                                bookArray[book].getAuthorName() + " --- " +
+                                bookArray[book].getPublicationYear());
+
+            }
         }
     }
 
