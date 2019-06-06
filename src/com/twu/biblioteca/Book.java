@@ -2,62 +2,44 @@ package com.twu.biblioteca;
 
 public class Book {
     private int IDBook;
-    private String bookName;
+    private String name;
     private String authorName;
     private int publicationYear;
-    private boolean isAvaliable; //If it's checked out, is not avaliable
+    private boolean isAvailable; //If it's checked out, is not available
 
 
 
-    public Book(int IDBook, String bookName, String authorName, int publicationYear, boolean isAvaliable) {
+    public Book(int IDBook, String name, String authorName, int publicationYear, boolean isAvailable) {
         this.IDBook = IDBook;
-        this.bookName = bookName;
+        this.name = name;
         this.authorName = authorName;
         this.publicationYear = publicationYear;
-        this.isAvaliable = isAvaliable;
+        this.isAvailable = isAvailable;
     }
 
     public int getIDBook() {
         return IDBook;
     }
 
-    public void setIDBook(int IDBook) {
-        this.IDBook = IDBook;
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public boolean isAvaliable() {
-        return isAvaliable;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
-    public void setAvaliable(boolean avaliable) {
-        isAvaliable = avaliable;
-    }
-
-    public Book(boolean isAvaliable) {
-        this.isAvaliable = isAvaliable;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public String getName() {
+        return name;
     }
 
     public String getAuthorName() {
         return authorName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
     public int getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
 }

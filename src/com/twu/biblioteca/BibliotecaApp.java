@@ -7,7 +7,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
 
-        Book bookArray[] = new Book[3];
+    Book bookArray[] = new Book[3];//Deberia usar arrayList
 
         bookArray[0] = new Book(1,"BookName1", "David", 2001, true);
         bookArray[1] = new Book(2,"BookName2", "Alejandro", 2010, true);
@@ -30,7 +30,7 @@ public class BibliotecaApp {
             optionChoosen = scanner.nextInt();
 
 
-            switch (optionChoosen) {
+            switch (optionChoosen) {   //Deberia usar HashMap
                 case 1:
 
                     System.out.println("LIST OF AVAILABLE BOOKS");
@@ -61,7 +61,7 @@ public class BibliotecaApp {
                             if(optionCheckout<bookArray.length){
                                 System.out.println("You choose the book number "
                                         +(optionCheckout+1));
-                                if (bookArray[optionCheckout].isAvaliable()) {
+                                if (bookArray[optionCheckout].isAvailable()) {
                                     changeBookStatus(bookArray,optionCheckout);
                                     System.out.println("Thank you. Enjoy the book.");
                                     break;
@@ -98,7 +98,7 @@ public class BibliotecaApp {
                             System.out.println("You choose the book number "
                                     +(optionReturn+1));
 
-                            if (!bookArray[optionReturn].isAvaliable()) {
+                            if (!bookArray[optionReturn].isAvailable()) {
                                 changeBookStatus(bookArray,optionReturn);
                                 System.out.println("Thank you for returning the book.");
                                 break;
@@ -138,7 +138,7 @@ public class BibliotecaApp {
 
 
             System.out.println(
-                    bookArray[book].getBookName() + " --- " +
+                    bookArray[book].getName() + " --- " +
                             bookArray[book].getAuthorName() + " --- " +
                             bookArray[book].getPublicationYear());
 
@@ -149,11 +149,11 @@ public class BibliotecaApp {
 
         for (int book = 0; book < bookArray.length; book++) {
 
-            if (bookArray[book].isAvaliable()) {
+            if (bookArray[book].isAvailable()) {
 
                 System.out.println(
                         bookArray[book].getIDBook() + ". " +
-                                bookArray[book].getBookName() + " --- " +
+                                bookArray[book].getName() + " --- " +
                                 bookArray[book].getAuthorName() + " --- " +
                                 bookArray[book].getPublicationYear());
 
@@ -165,11 +165,11 @@ public class BibliotecaApp {
 
         for (int book = 0; book < bookArray.length; book++) {
 
-            if (!bookArray[book].isAvaliable()) {
+            if (!bookArray[book].isAvailable()) {
 
                 System.out.println(
                         bookArray[book].getIDBook() + ". " +
-                                bookArray[book].getBookName() + " --- " +
+                                bookArray[book].getName() + " --- " +
                                 bookArray[book].getAuthorName() + " --- " +
                                 bookArray[book].getPublicationYear());
 
@@ -179,10 +179,10 @@ public class BibliotecaApp {
 
     public static void changeBookStatus(Book[] bookArray, int bookID) {
 
-        if (bookArray[bookID].isAvaliable()){
-            bookArray[bookID].setAvaliable(false);
+        if (bookArray[bookID].isAvailable()){
+            bookArray[bookID].setAvailable(false);
         }else{
-            bookArray[bookID].setAvaliable(true);
+            bookArray[bookID].setAvailable(true);
         }
 
 
