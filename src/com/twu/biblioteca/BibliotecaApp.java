@@ -8,24 +8,63 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
 
-        Book bookA = new Book(1, "BookName1", "David", 2001);
-        Book bookB = new Book(2, "BookName2", "Alejandro", 2010);
-        Book bookC = new Book(3, "BookName3", "Melany", 2011);
 
-        ArrayList<Book> bookList = new ArrayList<Book>();
+
+        Book bookA = new Book(101, "Demian", "Herman Hesse", 1923);
+        Book bookB = new Book(102, "Agile Samurai", "Jonathan Rasmusson", 2010);
+        Book bookC = new Book(103, "Pedro Paramo", "Juan Rulfo", 1955);
+
+        ArrayList<Book> bookList = new ArrayList<Book>();//<Item>
 
         bookList.add(bookA);
         bookList.add(bookB);
         bookList.add(bookC);
 
 
-        int optionChoosen = 5;
+        Movie movieA = new Movie(201,"Fast and Furious","Rob Cohen",2001);
+        Movie movieB = new Movie(202,"2 Fast 2 Furious","John Singleton",2003);
+        Movie movieC = new Movie(203,"The Fast and the Furious: Tokyo Drift","Justin Lin",2006);
+        Movie movieD = new Movie(204,"Fast & Furious", "Justin Lin",2009);
+        Movie movieE = new Movie(205,"Fast Five", "Justin Lin",2011);
+
+        int optionChosen = 5;
         Scanner scanner = new Scanner(System.in);
 
-        while (optionChoosen != 0) {
+        while (optionChosen != 0) {
             showMenu();
-            optionChoosen = scanner.nextInt();
-            switch (optionChoosen) {
+            optionChosen = scanner.nextInt();
+            switch (optionChosen) {
+                case 1:
+                    books(bookList);
+                    break;
+                case 2:
+                    checkOutABook(bookList);
+                    break;
+                case 3:
+                    returnABook(bookList);
+                    break;
+                case 0:
+                    System.out.println("Bye!");
+                    break;
+                default:
+                    System.out.println("Please select a valid option!");
+
+            }
+
+        }
+
+
+    }
+
+    private static void books(ArrayList<Book> bookList) {
+        Scanner scanner = new Scanner(System.in);
+
+        int optionBooks = -1;
+        while (optionBooks != 0) {
+            showMenuBooks();
+
+            optionBooks = scanner.nextInt();
+            switch (optionBooks) {
                 case 1:
                     listAvailableBooks(bookList);
                     break;
@@ -48,12 +87,21 @@ public class BibliotecaApp {
 
     }
 
-
-    private static void showMenu() {
+    private static void showMenuBooks() {
+        System.out.println("*****  BOOKS  *****");
         System.out.println("Choose an option to continue:");
         System.out.println("1. List of books");
         System.out.println("2. Checkout a book");
         System.out.println("3. Return a book");
+        System.out.println("0. Exit");
+
+    }
+
+
+    private static void showMenu() {
+        System.out.println("Choose an option to continue:");
+        System.out.println("1. Books");
+        System.out.println("2. Movies");
         System.out.println("0. Quit");
 
     }
