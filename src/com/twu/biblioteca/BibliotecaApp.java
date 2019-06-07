@@ -82,9 +82,9 @@ public class BibliotecaApp {
 
     private static void printListOfBooks(Book book) {
         System.out.println(
-                book.getIDBook() + ". " +
+                book.getID() + ". " +
                         book.getName() + " --- " +
-                        book.getAuthorName() + " --- " +
+                        book.getAuthor() + " --- " +
                         book.getPublicationYear()
         );
     }
@@ -94,7 +94,7 @@ public class BibliotecaApp {
 
         for (Book book : bookList
         ) {
-            if (book.getIDBook() == bookID) {
+            if (book.getID() == bookID) {
                 if (book.isAvailable()) {
                     book.setAvailable(false);
                 } else {
@@ -131,7 +131,7 @@ public class BibliotecaApp {
                         + (optionCheckout));
 
                 for (Book book : bookList) {
-                    if (optionCheckout == book.getIDBook()) {
+                    if (optionCheckout == book.getID()) {
                         if (book.isAvailable()) {
                             changeBookStatus(bookList, optionCheckout);
                             System.out.println("Thank you. Enjoy the book!");
@@ -174,7 +174,7 @@ public class BibliotecaApp {
 
                 for (Book book : bookList) {
 
-                    if (optionReturn == book.getIDBook()) {
+                    if (optionReturn == book.getID()) {
                         if (!book.isAvailable()) {
                             changeBookStatus(bookList, optionReturn);
                             System.out.println("Thank you for returning the book.");

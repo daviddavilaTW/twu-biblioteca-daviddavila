@@ -37,7 +37,7 @@ public class BookTest {
 
         Book book = new Book(10, "100 Anios", expectedAuthorName, 2001);
 
-        assertThat(book.getAuthorName(), is(expectedAuthorName));
+        assertThat(book.getAuthor(), is(expectedAuthorName));
     }
 
     @Test
