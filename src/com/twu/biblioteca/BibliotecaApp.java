@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -9,9 +8,9 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
 
-        Book bookA = new Book(1, "BookName1", "David", 2001, true);
-        Book bookB = new Book(2, "BookName2", "Alejandro", 2010, true);
-        Book bookC = new Book(3, "BookName3", "Melany", 2011, false);
+        Book bookA = new Book(1, "BookName1", "David", 2001);
+        Book bookB = new Book(2, "BookName2", "Alejandro", 2010);
+        Book bookC = new Book(3, "BookName3", "Melany", 2011);
 
         ArrayList<Book> bookList = new ArrayList<Book>();
 
@@ -123,7 +122,7 @@ public class BibliotecaApp {
             System.out.println("0. Exit to main menu");
             optionCheckout = scanner.nextInt();
 
-            if (optionCheckout==0){
+            if (optionCheckout == 0) {
                 break;
             }
 
@@ -146,7 +145,7 @@ public class BibliotecaApp {
 
 
                 }
-            }else {
+            } else {
                 System.out.println("Choose a correct option");
             }
         }
@@ -165,7 +164,7 @@ public class BibliotecaApp {
             listUnavailableBooks(bookList);
             System.out.println("0. Exit to main menu");
             optionReturn = scanner.nextInt();
-            if (optionReturn==0){
+            if (optionReturn == 0) {
                 break;
             }
 
