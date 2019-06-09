@@ -18,4 +18,13 @@ public class Movie extends Item
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public void checkout() {
+
+        this.setAvailable(false);
+    }
+
+    public void checkIn() {
+        this.setAvailable(true);
+    }
 }

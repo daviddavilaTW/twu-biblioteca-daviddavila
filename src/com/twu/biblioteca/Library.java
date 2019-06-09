@@ -149,6 +149,7 @@ public class Library {
                 }
             } else {
                 System.out.println("Choose a correct option");
+                break;
             }
         }
     }
@@ -198,6 +199,26 @@ public class Library {
             }
     }
 
+    public void checkOutAMovie(ArrayList<Movie> movieList, int optionCheckout) {
+        for (Movie movie:movieList) {
+            if (optionCheckout == movie.getID()) {
+                if (movie.isAvailable()) {
+                    movie.checkout();
+                    System.out.println("Thank you. Enjoy the movie!");
+                    break;
+
+                } else {
+                    System.out.println("Sorry. This movie is not available.");
+                    break;
+                }
+            } else {
+                System.out.println("Choose a correct option");
+                break;
+            }
+        }
+
+
+    }
 }
 
 

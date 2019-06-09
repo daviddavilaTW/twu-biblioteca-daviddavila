@@ -18,19 +18,25 @@ public class BibliotecaApp {
 
         while (optionChosen != 0) {
             showMainMenu();
-            optionChosen = scanner.nextInt();
-            switch (optionChosen) {
-                case 1:
-                    library.optionBooks(library.bookList);
-                    break;
-                case 0:
-                    System.out.println("Bye!");
-                    break;
-                default:
-                    System.out.println("Please select a valid option!");
-
-            }
+            optionChosen = getOptionChosen(library, scanner);
         }
+    }
+
+    private static int getOptionChosen(Library library, Scanner scanner) {
+        int optionChosen;
+        optionChosen = scanner.nextInt();
+        switch (optionChosen) {
+            case 1:
+                library.optionBooks(library.bookList);
+                break;
+            case 0:
+                System.out.println("Bye!");
+                break;
+            default:
+                System.out.println("Please select a valid option!");
+
+        }
+        return optionChosen;
     }
 
     private static void showMainMenu() {
