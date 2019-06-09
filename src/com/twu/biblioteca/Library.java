@@ -54,7 +54,7 @@ public class Library {
                     optionCheckOutABook(bookList);
                     break;
                 case 3:
-                    returnABook(bookList);
+                    optionReturnABook(bookList);
                     break;
                 case 0:
                     System.out.println("Bye!");
@@ -153,7 +153,7 @@ public class Library {
         }
     }
 
-    private void returnABook(ArrayList<Book> bookList) {
+    public void optionReturnABook(ArrayList<Book> bookList) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("RETURN A BOOK");
@@ -166,44 +166,42 @@ public class Library {
             listUnavailableBooks(bookList);
             System.out.println("0. Exit to main menu");
             optionReturn = scanner.nextInt();
+
             if (optionReturn == 0) {
                 break;
             }
-
-            if (optionReturn < bookList.size() && optionReturn > 0) {
-                System.out.println("You choose the book number "
-                        + (optionReturn));
-
-                for (Book book : bookList) {
-
-                    if (optionReturn == book.getID()) {
-                        if (!book.isAvailable()) {
-                            System.out.println("Thank you for returning the book.");
-                            break;
-
-                        } else {
-                            System.out.println("That's not a valid book to return.");
-                            break;
-                        }
-
-                    }
-
-
-                }
-
-
-            } else {
-                System.out.println("Choose a correct option");
-                break;
-
-            }
+            returnABook(bookList, optionReturn);
 
         }
 
+        }
+
+    public void returnABook(ArrayList<Book> bookList, int optionReturn) {
+        for (Book book : bookList) {
+
+                if (optionReturn == book.getID()) {
+                    if (!book.isAvailable()) {
+                        book.checkIn();
+                        System.out.println("Thank you for returning the book.");
+                        break;
+
+                    } else {
+                        System.out.println("That's not a valid book to return.");
+                        break;
+                    }
+
+                } else {
+                    System.out.println("Choose a correct option");
+                }
+
+
+            }
     }
 
-
-
-
-
 }
+
+
+
+
+
+

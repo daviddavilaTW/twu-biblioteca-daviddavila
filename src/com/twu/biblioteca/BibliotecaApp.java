@@ -30,10 +30,7 @@ public class BibliotecaApp {
                     System.out.println("Please select a valid option!");
 
             }
-
         }
-
-
     }
 
     private static void showMainMenu() {

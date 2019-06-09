@@ -24,4 +24,19 @@ public class LibraryTest {
         assertThat(book.isAvailable(),is(expectedAvailability));
 
     }
+
+
+    @Test
+    public void shouldSetInAvailableTrueWhenABookIsReturned() {
+        boolean expectedAvailability = true;
+        Book book = new Book(101, "Demian", "Herman Hesse", 1923);
+        bookList.add(book);
+        Library library =  new Library();
+
+        book.setAvailable(false);
+        library.returnABook(bookList,101);
+
+        assertThat(book.isAvailable(),is(expectedAvailability));
+
+    }
 }
