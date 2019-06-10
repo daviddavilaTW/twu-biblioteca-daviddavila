@@ -36,10 +36,27 @@ public class Library {
         movieList.add(movieE);
     }
 
-    public void optionMovies(ArrayList<Movie> movieList) {
-        listAvailableMovies(movieList);
+    public void printListOfItems(Item item) {
+
+        System.out.println(
+                item.getID() + ". " +
+                        item.getName() + " --- " +
+                        item.getAuthor() + " --- " +
+                        item.getPublicationYear()
+        );
     }
 
+
+
+    public void showMenuBooks() {
+        System.out.println("*****  BOOKS  *****");
+        System.out.println("Choose an option to continue:");
+        System.out.println("1. List of books");
+        System.out.println("2. Checkout a book");
+        System.out.println("3. Return a book");
+        System.out.println("0. Main Menu");
+
+    }
 
     public void optionBooks(ArrayList<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
@@ -72,19 +89,6 @@ public class Library {
 
     }
 
-    public void showMenuBooks() {
-        System.out.println("*****  BOOKS  *****");
-        System.out.println("Choose an option to continue:");
-        System.out.println("1. List of optionBooks");
-        System.out.println("2. Checkout a book");
-        System.out.println("3. Return a book");
-        System.out.println("0. Exit");
-
-    }
-
-
-
-
     public void listAvailableBooks(ArrayList<Book> bookList) {
         System.out.println("LIST OF AVAILABLE BOOKS");
         for (Book book : bookList) {
@@ -95,7 +99,6 @@ public class Library {
         }
     }
 
-
     public void listUnavailableBooks(ArrayList<Book> bookList) {
         System.out.println("LIST OF BOOKS TO BE RETURNED");
         for (Book book : bookList) {
@@ -105,17 +108,6 @@ public class Library {
 
         }
     }
-
-    public void printListOfItems(Item item) {
-
-        System.out.println(
-                item.getID() + ". " +
-                        item.getName() + " --- " +
-                        item.getAuthor() + " --- " +
-                        item.getPublicationYear()
-        );
-    }
-
 
     public void optionCheckOutABook(ArrayList<Book> bookList) {
 
@@ -128,20 +120,21 @@ public class Library {
 
             System.out.println("Choose a book to checkout to continue:");
             listAvailableBooks(bookList);
-            System.out.println("0. Exit to main menu");
+            System.out.println("0. Exit to book menu");
             optionCheckout = scanner.nextInt();
 
             if (optionCheckout == 0) {
                 break;
             }
-
             checkOutABook(bookList, optionCheckout);
         }
     }
 
     public void checkOutABook(ArrayList<Book> bookList, int optionCheckout) {
+        boolean existsBook = false;
         for (Book book:bookList) {
             if (optionCheckout == book.getID()) {
+                existsBook = true;
                 if (book.isAvailable()) {
                     book.checkout();
                     System.out.println("Thank you. Enjoy the book!");
@@ -151,10 +144,11 @@ public class Library {
                     System.out.println("Sorry. This book is not available.");
                     break;
                 }
-            } else {
-                System.out.println("Choose a correct option");
-                break;
             }
+
+        }
+        if (!existsBook){
+            System.out.println("Wrong option. Choose a correct option");
         }
     }
 
@@ -203,9 +197,13 @@ public class Library {
             }
     }
 
+
+
     public void checkOutAMovie(ArrayList<Movie> movieList, int optionCheckout) {
+        boolean existsMovie = false;
         for (Movie movie:movieList) {
             if (optionCheckout == movie.getID()) {
+                existsMovie = true;
                 if (movie.isAvailable()) {
                     movie.checkout();
                     System.out.println("Thank you. Enjoy the movie!");
@@ -215,24 +213,84 @@ public class Library {
                     System.out.println("Sorry. This movie is not available.");
                     break;
                 }
-            } else {
-                System.out.println("Choose a correct option");
-                break;
             }
-        }
 
+
+        }
+        if(!existsMovie) {
+            System.out.println("Wrong option. Choose a correct option");
+        }
 
     }
 
+    public void optionMovies(ArrayList<Movie> movieList) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int optionMovies = -1;
+        while (optionMovies != 0) {
+            showMenuMovies();
+
+            optionMovies = scanner.nextInt();
+            switch (optionMovies) {
+                case 1:
+                    listAvailableMovies(movieList);
+                    break;
+                case 2:
+                    optionCheckOutAMovie(movieList);
+                    break;
+                case 0:
+                    System.out.println("Bye!");
+                    break;
+                default:
+                    System.out.println("Please select a valid option!");
+
+            }
+        }
+    }
+
+    public void showMenuMovies() {
+        System.out.println("*****  MOVIES  *****");
+        System.out.println("Choose an option to continue:");
+        System.out.println("1. List of movies");
+        System.out.println("2. Checkout a movie");
+        System.out.println("0. Main Menu");
+
+    }
 
     public void listAvailableMovies(ArrayList<Movie> movieList) {
 
         System.out.println("LIST OF AVAILABLE MOVIES");
         for (Movie movie:movieList
              ) {
-            printListOfItems(movie);
+            if(movie.isAvailable()){
+                printListOfItems(movie);
+
+            }
 
 
+        }
+    }
+
+    public void optionCheckOutAMovie(ArrayList<Movie> movieList) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("CHECK OUT A MOVIE");
+
+        int optionCheckout = -1;
+
+        while (optionCheckout != 0) {
+            System.out.println("Choose a movie to checkout to continue:");
+            listAvailableMovies(movieList);
+            System.out.println("0. Exit to movie menu");
+
+            optionCheckout = scanner.nextInt();
+
+            if (optionCheckout == 0) {
+                break;
+            }
+
+            checkOutAMovie(movieList, optionCheckout);
         }
     }
 }

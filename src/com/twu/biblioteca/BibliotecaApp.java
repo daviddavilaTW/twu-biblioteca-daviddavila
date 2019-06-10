@@ -31,6 +31,7 @@ public class BibliotecaApp {
                 break;
             case 2:
                 library.optionMovies(library.movieList);
+                break;
             case 0:
                 System.out.println("Bye!");
                 break;

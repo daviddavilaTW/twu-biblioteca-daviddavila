@@ -51,7 +51,6 @@ public class LibraryTest {
 
         assertThat(movie.isAvailable(), is(expectedAvailable));
 
-
-
     }
+
 }
