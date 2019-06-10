@@ -29,6 +29,8 @@ public class BibliotecaApp {
             case 1:
                 library.optionBooks(library.bookList);
                 break;
+            case 2:
+                library.optionMovies(library.movieList);
             case 0:
                 System.out.println("Bye!");
                 break;

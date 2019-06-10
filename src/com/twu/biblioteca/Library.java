@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Library {
 
     ArrayList<Book> bookList = new ArrayList<Book>();
+    ArrayList<Movie> movieList = new ArrayList<Movie>();//<Item>
 
 
     public void addItems(){
@@ -27,7 +28,6 @@ public class Library {
         Movie movieD = new Movie(204,"Fast & Furious", "Justin Lin",2009);
         Movie movieE = new Movie(205,"Fast Five", "Justin Lin",2011);
 
-        ArrayList<Item> movieList = new ArrayList<Item>();//<Item>
 
         movieList.add(movieA);
         movieList.add(movieB);
@@ -36,6 +36,9 @@ public class Library {
         movieList.add(movieE);
     }
 
+    public void optionMovies(ArrayList<Movie> movieList) {
+        listAvailableMovies(movieList);
+    }
 
 
     public void optionBooks(ArrayList<Book> bookList) {
@@ -86,7 +89,7 @@ public class Library {
         System.out.println("LIST OF AVAILABLE BOOKS");
         for (Book book : bookList) {
             if (book.isAvailable()) {
-                printListOfBooks(book);
+                printListOfItems(book);
             }
 
         }
@@ -97,18 +100,19 @@ public class Library {
         System.out.println("LIST OF BOOKS TO BE RETURNED");
         for (Book book : bookList) {
             if (!book.isAvailable()) {
-                printListOfBooks(book);
+                printListOfItems(book);
             }
 
         }
     }
 
-    public void printListOfBooks(Book book) {
+    public void printListOfItems(Item item) {
+
         System.out.println(
-                book.getID() + ". " +
-                        book.getName() + " --- " +
-                        book.getAuthor() + " --- " +
-                        book.getPublicationYear()
+                item.getID() + ". " +
+                        item.getName() + " --- " +
+                        item.getAuthor() + " --- " +
+                        item.getPublicationYear()
         );
     }
 
@@ -218,6 +222,18 @@ public class Library {
         }
 
 
+    }
+
+
+    public void listAvailableMovies(ArrayList<Movie> movieList) {
+
+        System.out.println("LIST OF AVAILABLE MOVIES");
+        for (Movie movie:movieList
+             ) {
+            printListOfItems(movie);
+
+
+        }
     }
 }
 
