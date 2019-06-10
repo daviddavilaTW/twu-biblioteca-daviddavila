@@ -46,8 +46,6 @@ public class Library {
         );
     }
 
-
-
     public void showMenuBooks() {
         System.out.println("*****  BOOKS  *****");
         System.out.println("Choose an option to continue:");
@@ -196,8 +194,6 @@ public class Library {
 
             }
     }
-
-
 
     public void checkOutAMovie(ArrayList<Movie> movieList, int optionCheckout) {
         boolean existsMovie = false;

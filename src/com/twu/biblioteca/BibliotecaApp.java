@@ -5,13 +5,27 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
+    public static User actualUser;
+
     public static void main(String[] args) {
+
+        ArrayList<User> userList = new ArrayList<User>();
+
+        User user1 = new User("111-1111","1");
+        User user2 = new User("222-2222","2");
+
+        userList.add(user1);
+        userList.add(user2);
+
 
         Library library = new Library();
         library.addItems();
 
-        System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
+        login(userList, library);
 
+    }
+
+    private static void mainMenu(Library library) {
         int optionChosen = 5;
 
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +33,52 @@ public class BibliotecaApp {
         while (optionChosen != 0) {
             showMainMenu();
             optionChosen = getOptionChosen(library, scanner);
+        }
+    }
+
+    public static void login(ArrayList<User> userList, Library library){
+
+        Scanner scanner = new Scanner(System.in);
+        String actualLibraryNumber = "";
+        while (true) {
+
+
+            System.out.print("Enter your library number: ");
+            actualLibraryNumber = scanner.next();
+
+
+            for (User user : userList) {
+
+                checkLibraryNumber(library, scanner, actualLibraryNumber, user);
+            }
+
+
+        }
+    }
+
+    private static void checkLibraryNumber(Library library, Scanner scanner, String actualLibraryNumber, User user) {
+        if(user.getLibraryNumber().equals(actualLibraryNumber)) {
+
+            System.out.print("Enter your password: ");
+            String actualPassword = scanner.next();
+            checkPassword(library, user, actualPassword);
+
+        }else{
+            System.out.println("Incorrect Information.");
+        }
+
+
+    }
+
+    public static void checkPassword(Library library, User user, String actualPassword) {
+        if (user.getPassword().equals(actualPassword)){
+
+            actualUser = user;
+
+            System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n \n");
+
+            mainMenu(library);
+
         }
     }
 
