@@ -6,6 +6,10 @@ public class Item {
     private String author;
     private int publicationYear;
     private boolean isAvailable;
+    private User owner;
+
+    BibliotecaApp bibliotecaApp = new BibliotecaApp();
+
 
     public Item(int ID, String name, String author, int publicationYear) {
         this.ID = ID;
@@ -13,6 +17,15 @@ public class Item {
         this.author = author;
         this.publicationYear = publicationYear;
         this.isAvailable = true;
+        this.owner = bibliotecaApp.librarian;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public int getID() {

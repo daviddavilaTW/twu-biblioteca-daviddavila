@@ -6,14 +6,15 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     public static User actualUser;
+    public static User librarian = new User ("000-0000","0");
 
     public static void main(String[] args) {
 
         ArrayList<User> userList = new ArrayList<User>();
-
         User user1 = new User("111-1111","1");
         User user2 = new User("222-2222","2");
 
+        userList.add(librarian);
         userList.add(user1);
         userList.add(user2);
 
@@ -87,10 +88,10 @@ public class BibliotecaApp {
         optionChosen = scanner.nextInt();
         switch (optionChosen) {
             case 1:
-                library.optionBooks(library.bookList);
+                library.optionBooks();
                 break;
             case 2:
-                library.optionMovies(library.movieList);
+                library.optionMovies();
                 break;
             case 0:
                 System.out.println("Bye!");

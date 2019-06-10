@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.twu.biblioteca.BibliotecaApp.actualUser;
+
 public class Library {
 
     ArrayList<Book> bookList = new ArrayList<Book>();
@@ -56,7 +58,7 @@ public class Library {
 
     }
 
-    public void optionBooks(ArrayList<Book> bookList) {
+    public void optionBooks() {
         Scanner scanner = new Scanner(System.in);
 
         int optionBooks = -1;
@@ -66,13 +68,13 @@ public class Library {
             optionBooks = scanner.nextInt();
             switch (optionBooks) {
                 case 1:
-                    listAvailableBooks(bookList);
+                    listAvailableBooks();
                     break;
                 case 2:
-                    optionCheckOutABook(bookList);
+                    optionCheckOutABook();
                     break;
                 case 3:
-                    optionReturnABook(bookList);
+                    optionReturnABook();
                     break;
                 case 0:
                     System.out.println("Bye!");
@@ -87,9 +89,9 @@ public class Library {
 
     }
 
-    public void listAvailableBooks(ArrayList<Book> bookList) {
+    public void listAvailableBooks() {
         System.out.println("LIST OF AVAILABLE BOOKS");
-        for (Book book : bookList) {
+        for (Book book : this.bookList) {
             if (book.isAvailable()) {
                 printListOfItems(book);
             }
@@ -97,9 +99,9 @@ public class Library {
         }
     }
 
-    public void listUnavailableBooks(ArrayList<Book> bookList) {
+    public void listUnavailableBooks() {
         System.out.println("LIST OF BOOKS TO BE RETURNED");
-        for (Book book : bookList) {
+        for (Book book : this.bookList) {
             if (!book.isAvailable()) {
                 printListOfItems(book);
             }
@@ -107,7 +109,7 @@ public class Library {
         }
     }
 
-    public void optionCheckOutABook(ArrayList<Book> bookList) {
+    public void optionCheckOutABook() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("CHECK OUT A BOOK");
@@ -117,31 +119,24 @@ public class Library {
         while (optionCheckout != 0) {
 
             System.out.println("Choose a book to checkout to continue:");
-            listAvailableBooks(bookList);
+            listAvailableBooks();
             System.out.println("0. Exit to book menu");
             optionCheckout = scanner.nextInt();
 
             if (optionCheckout == 0) {
                 break;
             }
-            checkOutABook(bookList, optionCheckout);
+            checkOutABook(optionCheckout);
         }
     }
 
-    public void checkOutABook(ArrayList<Book> bookList, int optionCheckout) {
+    public void checkOutABook(int optionCheckout) {
         boolean existsBook = false;
-        for (Book book:bookList) {
+        for (Book book:this.bookList) {
             if (optionCheckout == book.getID()) {
                 existsBook = true;
-                if (book.isAvailable()) {
-                    book.checkout();
-                    System.out.println("Thank you. Enjoy the book!");
-                    break;
-
-                } else {
-                    System.out.println("Sorry. This book is not available.");
-                    break;
-                }
+                checkBookAvailability(book);
+                break;
             }
 
         }
@@ -150,7 +145,20 @@ public class Library {
         }
     }
 
-    public void optionReturnABook(ArrayList<Book> bookList) {
+    public void checkBookAvailability(Book book) {
+        if (book.isAvailable()) {
+            book.checkout();
+            System.out.println("Thank you. Enjoy the book!");
+            book.setOwner(actualUser);
+            return;
+
+        } else {
+            System.out.println("Sorry. This book is not available.");
+            return;
+        }
+    }
+
+    public void optionReturnABook() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("RETURN A BOOK");
@@ -160,32 +168,25 @@ public class Library {
         while (optionReturn != 0) {
 
             System.out.println("Choose a book to return to continue:");
-            listUnavailableBooks(bookList);
+            listUnavailableBooks();
             System.out.println("0. Exit to main menu");
             optionReturn = scanner.nextInt();
 
             if (optionReturn == 0) {
                 break;
             }
-            returnABook(bookList, optionReturn);
+            returnABook(optionReturn);
 
         }
 
         }
 
-    public void returnABook(ArrayList<Book> bookList, int optionReturn) {
-        for (Book book : bookList) {
+    public void returnABook( int optionReturn) {
+        for (Book book : this.bookList) {
 
                 if (optionReturn == book.getID()) {
-                    if (!book.isAvailable()) {
-                        book.checkIn();
-                        System.out.println("Thank you for returning the book.");
-                        break;
-
-                    } else {
-                        System.out.println("That's not a valid book to return.");
-                        break;
-                    }
+                    checkBookUnavailability(book);
+                    break;
 
                 } else {
                     System.out.println("Choose a correct option");
@@ -195,20 +196,24 @@ public class Library {
             }
     }
 
-    public void checkOutAMovie(ArrayList<Movie> movieList, int optionCheckout) {
-        boolean existsMovie = false;
-        for (Movie movie:movieList) {
-            if (optionCheckout == movie.getID()) {
-                existsMovie = true;
-                if (movie.isAvailable()) {
-                    movie.checkout();
-                    System.out.println("Thank you. Enjoy the movie!");
-                    break;
+    public void checkBookUnavailability(Book book) {
+        if (!book.isAvailable()) {
+            book.checkIn();
+            System.out.println("Thank you for returning the book.");
+            return;
 
-                } else {
-                    System.out.println("Sorry. This movie is not available.");
-                    break;
-                }
+        } else {
+            System.out.println("That's not a valid book to return.");
+            return;
+        }
+    }
+
+    public void checkOutAMovie( int optionCheckout) {
+        boolean existsMovie = false;
+        for (Movie movie: this.movieList) {
+            if (optionCheckout == movie.getID()) {
+                checkMovieAvailability(movie);
+                break;
             }
 
 
@@ -219,7 +224,19 @@ public class Library {
 
     }
 
-    public void optionMovies(ArrayList<Movie> movieList) {
+    public void checkMovieAvailability(Movie movie) {
+        if (movie.isAvailable()) {
+            movie.checkout();
+            System.out.println("Thank you. Enjoy the movie!");
+            return;
+
+        } else {
+            System.out.println("Sorry. This movie is not available.");
+            return;
+        }
+    }
+
+    public void optionMovies() {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -230,10 +247,10 @@ public class Library {
             optionMovies = scanner.nextInt();
             switch (optionMovies) {
                 case 1:
-                    listAvailableMovies(movieList);
+                    listAvailableMovies();
                     break;
                 case 2:
-                    optionCheckOutAMovie(movieList);
+                    optionCheckOutAMovie();
                     break;
                 case 0:
                     System.out.println("Bye!");
@@ -254,10 +271,10 @@ public class Library {
 
     }
 
-    public void listAvailableMovies(ArrayList<Movie> movieList) {
+    public void listAvailableMovies() {
 
         System.out.println("LIST OF AVAILABLE MOVIES");
-        for (Movie movie:movieList
+        for (Movie movie:this.movieList
              ) {
             if(movie.isAvailable()){
                 printListOfItems(movie);
@@ -268,7 +285,7 @@ public class Library {
         }
     }
 
-    public void optionCheckOutAMovie(ArrayList<Movie> movieList) {
+    public void optionCheckOutAMovie() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("CHECK OUT A MOVIE");
@@ -277,7 +294,7 @@ public class Library {
 
         while (optionCheckout != 0) {
             System.out.println("Choose a movie to checkout to continue:");
-            listAvailableMovies(movieList);
+            listAvailableMovies();
             System.out.println("0. Exit to movie menu");
 
             optionCheckout = scanner.nextInt();
@@ -286,7 +303,7 @@ public class Library {
                 break;
             }
 
-            checkOutAMovie(movieList, optionCheckout);
+            checkOutAMovie(optionCheckout);
         }
     }
 }
