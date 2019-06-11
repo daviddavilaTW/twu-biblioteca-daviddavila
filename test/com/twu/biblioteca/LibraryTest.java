@@ -57,7 +57,7 @@ public class LibraryTest {
 
     @Test
     public void shouldReturn1111111InTheInfoOfTheBook101() {
-        User user = new User("111-1111","1");
+        User user = new User("111-1111","1","","","");
         Book book = new Book(101,"BookTest","NameTest",2019);
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         Library library = new Library();
