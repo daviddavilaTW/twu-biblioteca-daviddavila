@@ -20,7 +20,6 @@ public class BibliotecaApp {
 
 
         Library library = new Library();
-        User user = new User();
         library.addItems();
 
         login(userList, library);
@@ -39,7 +38,6 @@ public class BibliotecaApp {
     }
 
     public static void login(ArrayList<User> userList, Library library){
-
         Scanner scanner = new Scanner(System.in);
         String actualLibraryNumber = "";
         while (true) {
@@ -49,13 +47,19 @@ public class BibliotecaApp {
             actualLibraryNumber = scanner.next();
 
 
-            for (User user : userList) {
+    for (User user : userList) {
 
-                checkLibraryNumber(library, scanner, actualLibraryNumber, user);
-            }
+        checkLibraryNumber(library, scanner, actualLibraryNumber, user);
+    }
+if(actualUser==null){
+    System.out.println("Incorrect Information.");
+
+}
+
+}
 
 
-        }
+
     }
 
     private static void checkLibraryNumber(Library library, Scanner scanner, String actualLibraryNumber, User user) {
@@ -65,8 +69,6 @@ public class BibliotecaApp {
             String actualPassword = scanner.next();
             checkPassword(library, user, actualPassword);
 
-        }else{
-            System.out.println("Incorrect Information.");
         }
 
 
