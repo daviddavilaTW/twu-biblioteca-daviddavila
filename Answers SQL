@@ -1,0 +1,81 @@
+-- THE BIBLIOTECA DATABAS
+-- Answers:
+-- 1.	Who checked out the book 'The Hobbit’?
+select name
+from member m, book b, checkout_item c
+where b.title = "The Hobbit"
+and b.id = c.book_id
+and c.member_id = m.id
+;
+Anand Beck
+
+-- 2.	How many people have not checked out anything?
+select
+(select count (id) from member ) 
+- 
+(select count (distinct member_id) 
+from checkout_item)
+;
+37
+
+-- 3.	What books and movies aren't checked out?
+SELECT B.TITLE
+FROM BOOK B
+WHERE B.ID IN (
+SELECT B.ID
+FROM BOOK B
+EXCEPT
+SELECT BOOK_ID
+FROM CHECKOUT_ITEM)
+;
+Fellowship of the Ring
+1984
+Tom Sawyer
+Catcher in the Rye
+To Kill a Mockingbird
+Domain Driven Design
+sqlite>
+SELECT M.TITLE
+FROM MOVIE M
+WHERE M.ID IN (
+SELECT M.ID
+FROM MOVIE M
+EXCEPT
+SELECT MOVIE_ID
+FROM CHECKOUT_ITEM)
+;
+Thin Red Line
+Crouching Tiger, Hidden Dragon
+Lawrence of Arabia
+Office Space
+
+-- 4.	Add the book 'The Pragmatic Programmer', and add yourself as a member. Check out 'The Pragmatic Programmer'. Use your query from question 1 to verify that you have checked it out. Also, provide the SQL used to update the database.
+
+INSERT INTO book
+VALUES (11,"The Pragmatic Programmer")
+;
+INSERT INTO member
+VALUES (43,"David Davila")
+;
+INSERT INTO CHECKOUT_ITEM
+VALUES (43,11,"")
+;
+select name
+from member m, book b, checkout_item c
+where b.title = "The Pragmatic Programmer"
+and b.id = c.book_id
+and c.member_id = m.id
+;
+David Davila
+
+-- 5.	Who has checked out more that 1 item? 
+Tip: Research the GROUP BY syntax
+
+SELECT M.NAME
+FROM CHECKOUT_ITEM C, MEMBER M
+WHERE M.ID = C.MEMBER_ID
+GROUP BY member_ID
+HAVING count(*)>1
+;
+Anand Beck
+Frank Smith
